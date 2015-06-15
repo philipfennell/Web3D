@@ -522,14 +522,23 @@
 -->
   </privileges>
   <mimetypes xmlns="http://marklogic.com/xdmp/mimetypes">
-<!--
-    Sample mimetype.
+
     <mimetype>
-      <name>application/crazy</name>
-      <extension>crazy stuff</extension>
+      <name>model/x3d+xml</name>
+      <extension>x3d</extension>
+      <format>xml</format>
+    </mimetype>
+    <mimetype>
+      <name>model/x3d-vrml</name>
+      <extension>x3dv</extension>
       <format>text</format>
     </mimetype>
--->
+    <mimetype>
+      <name>model/x3d+fastinfoset</name>
+      <extension>x3db</extension>
+      <format>binary</format>
+    </mimetype>
+
   </mimetypes>
 <!--
   <external-securities xmlns="http://marklogic.com/xdmp/security">

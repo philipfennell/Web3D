@@ -1,0 +1,8 @@
+<export><workspace name="Web3D"><query name="Query 1" focus="true" active="true" mode="xquery">xquery version "1.0-ml";
+    
+import module namespace m = "http://marklogic.com/roxy/model/examples" at 
+    "/app/models/examples.xqy";
+    
+m:get-asset('box', 'xhtml')
+
+</query></workspace></export>

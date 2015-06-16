@@ -11,6 +11,9 @@ import module namespace default = "http://marklogic.com/application/defaults" at
 import module namespace error = "http://marklogic.com/roxy/error-lib" at 
     "/app/views/helpers/error-lib.xqy";
     
+import module namespace http = "http://www.w3.org/Protocols/rfc2616" at 
+    "/app/lib/lib-http.xqy";
+    
 import module namespace m = "http://marklogic.com/roxy/model/examples" at 
     "/app/models/examples.xqy";
 
@@ -24,10 +27,10 @@ import module namespace req = "http://marklogic.com/roxy/request" at
 (:
  : Default function that returns an error message.
  :)
-declare function c:main() as item()*
+(:declare function c:main() as item()*
 {
   error:error-handling(405, error:http-response(405, fn:concat("Method Not Allowed: ", req:get("method")), ()))
-};
+};:)
     
 
 declare function c:index()
@@ -49,7 +52,10 @@ declare function c:retrieve()
   let $format := req:get("format")
   let $debug := xdmp:log('[XQuery][Web3D][examples] retrieving: ' || $id || ' as ' || $format, 'debug')
   return
-    m:get-asset($id, $format)
+    ( http:ok(m:get-asset($id), (), ()),
+      ch:use-view('examples/retrieve', $default:XML_EXTENSION),
+      ch:use-layout('x3d', $format) )
+      
 };
 
 

@@ -11,15 +11,14 @@ declare variable $m:BASE_URI as xs:string := "/examples";
 
 
 (:~
- : 
+ : Get the asset referenced in the request.
  : @param $document ID.
- : @param $document file format e.g. x3d, html, ...
- : @return the requested document or an empty sequence.
+ : @return the requested asset document or an empty sequence.
  :)
-declare function m:get-asset($id as xs:string, $format as xs:string) 
+declare function m:get-asset($id as xs:string) 
     as document-node()? 
 {
-  let $uri as xs:string := $m:BASE_URI || '/' || $format || '/' || $id || '.' || $format
+  let $uri as xs:string := $m:BASE_URI || '/' || $default:X3D_EXTENSION || '/' || $id || '.' || $default:X3D_EXTENSION
   return
     doc($uri)
 }; 

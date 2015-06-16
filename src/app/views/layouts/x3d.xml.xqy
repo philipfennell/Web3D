@@ -15,27 +15,14 @@ limitations under the License.
 :)
 xquery version "1.0-ml";
     
-import module namespace vh = "http://marklogic.com/roxy/view-helper" at 
-    "/roxy/lib/view-helper.xqy";
-
+import module namespace default = "http://marklogic.com/application/defaults" at 
+    "/app/config/defaults.xqy";
+    
 import module namespace vh = "http://marklogic.com/roxy/view-helper" at 
     "/roxy/lib/view-helper.xqy";
 
 declare variable $view as item()* := vh:get('view');
-declare variable $title as xs:string? := (vh:get('title'), 'Untitled')[1];
 
 
-xdmp:add-response-header('content-type', $default:XHTML_MEDIA_TYPE || '; charset=UTF-8'),
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="shortcut icon" href="/images/web3d/X3DtextIcon16.png" title="X3D" />
-    <link rel="stylesheet" type="text/css" href="/lib/x3dom/x3dom.css" />
-    <script type="text/javascript" src="/lib/x3dom/x3dom-full.js"></script>
-  </head>
-  <body>
-    <h1>{$title}</h1>
-    {$view}
-  </body>
-</html>
+( xdmp:add-response-header('content-type', $default:XML_MEDIA_TYPE || '; charset=UTF-8'),
+  $view )

@@ -43,9 +43,9 @@ declare variable $c:ROXY-OPTIONS :=
     </layouts>
     <formats>
       <format name="{$default:ATOM_EXTENSION}"  type="{$default:ATOM_MEDIA_TYPE}"/>
-      <format name="{$default:CSS_EXTENSION}"  type="{$default:CSS_MEDIA_TYPE}"/>      
+      <format name="{$default:CSS_EXTENSION}"   type="{$default:CSS_MEDIA_TYPE}"/>      
       <format name="{$default:JPEG_EXTENSION}"  type="{$default:JPEG_MEDIA_TYPE}"/>
-      <format name="{$default:JS_EXTENSION}"  type="{$default:JS_MEDIA_TYPE}"/>            
+      <format name="{$default:JS_EXTENSION}"    type="{$default:JS_MEDIA_TYPE}"/>            
       <format name="{$default:PDF_EXTENSION}"   type="{$default:PDF_MEDIA_TYPE}"/>
       <format name="{$default:PNG_EXTENSION}"   type="{$default:PNG_MEDIA_TYPE}"/>
       <format name="{$default:SCH_EXTENSION}"   type="{$default:SCH_MEDIA_TYPE}"/>
@@ -73,20 +73,17 @@ declare variable $c:ROXY-OPTIONS :=
  :)
 declare variable $c:ROXY-ROUTES :=
   <routes xmlns="http://marklogic.com/appservices/rest">
-    {
-      <request uri="^/examples/(.*)" endpoint="/app/query-router.xqy">
-        <uri-param name="controller" default="examples"/>
-        <uri-param name="func">retrieve</uri-param>
-        <uri-param name="format" default="html">$1</uri-param>
-        <http method="GET"/>
-      </request>
-    }
-    {
-      <request uri="^/lib/(.*)"     endpoint="/app/resources/lib/$1"/>,
-      <request uri="^/scripts/(.*)" endpoint="/app/resources/js/$1"/>,
-      <request uri="^/styles/(.*)"  endpoint="/app/resources/css/$1"/>,
-      <request uri="^/images/(.*)"  endpoint="/app/resources/images/$1"/>
-    }
+    <request uri="^/examples/([\w\d_\-]+)\.?(\w*)$" endpoint="/app/restfull-router.xqy">
+      <uri-param name="controller" default="examples"/>
+      <uri-param name="func">retrieve</uri-param>
+      <uri-param name="id">$1</uri-param>
+      <uri-param name="format" default="html">$2</uri-param>
+      <http method="GET"/>
+    </request>
+    <request uri="^/lib/(.*)"     endpoint="/app/resources/lib/$1"/>,
+    <request uri="^/scripts/(.*)" endpoint="/app/resources/js/$1"/>,
+    <request uri="^/styles/(.*)"  endpoint="/app/resources/css/$1"/>,
+    <request uri="^/images/(.*)"  endpoint="/app/resources/images/$1"/>
     {
       $def:ROXY-ROUTES/rest:request
     }

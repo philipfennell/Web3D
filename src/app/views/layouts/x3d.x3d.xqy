@@ -21,23 +21,8 @@ import module namespace default = "http://marklogic.com/application/defaults" at
 import module namespace vh = "http://marklogic.com/roxy/view-helper" at 
     "/roxy/lib/view-helper.xqy";
 
-declare variable $view as item()* := vh:get('view');
-declare variable $title as xs:string? := (vh:get('title'), 'Untitled')[1];
+declare variable $view as item()* := vh:get("view");
 
 
-xdmp:add-response-header('content-type', $default:HTML_MEDIA_TYPE || '; charset=UTF-8'),
-'<!DOCTYPE html>
-' || xdmp:quote(
-<html>
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="shortcut icon" href="/images/web3d/X3DtextIcon16.png" title="X3D" />
-    <link rel="stylesheet" type="text/css" href="/lib/x3dom/x3dom.css" />
-    <script type="text/javascript" src="/lib/x3dom/x3dom-full.js"></script>
-  </head>
-  <body>
-    <h1>{$title}</h1>
-    {$view}
-  </body>
-</html>, <options xmlns="xdmp:quote"><method>html</method></options>)
+( xdmp:add-response-header('content-type', $default:X3D_MEDIA_TYPE || '; charset=UTF-8'),
+  $view )

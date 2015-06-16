@@ -48,21 +48,22 @@ declare function c:create()
 declare function c:retrieve()
 {
   (: return the photo with the given id :)
-  let $id := req:get("id")
-  let $format := req:get("format")
+  let $id := req:get('id')
+  let $format := req:get('format')
   let $debug := xdmp:log('[XQuery][Web3D][examples] retrieving: ' || $id || ' as ' || $format, 'debug')
+  let $asset as document-node()? := m:get-asset($id)
   return
-    ( http:ok(m:get-asset($id), (), ()),
+    ( ch:add-value('title', $asset/X3D/Scene/WorldInfo/@title/string()),
+      http:ok($asset, (), ()),
       ch:use-view('examples/retrieve', $default:XML_EXTENSION),
       ch:use-layout('x3d', $format) )
-      
 };
 
 
 declare function c:update()
 {
   (: update the photo with the given id :)
-  let $id := req:get("id")
+  let $id := req:get('id')
   let $body := xdmp:get-request-body()
   return
     ()
@@ -72,7 +73,7 @@ declare function c:update()
 declare function c:delete()
 {
   (: delete the photo with the given id :)
-  let $id := req:get("id")
+  let $id := req:get('id')
   return
     ()
 };

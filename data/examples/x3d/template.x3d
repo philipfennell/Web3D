@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <X3D profile="Immersive" version="3.3">
+  <head>
+    <meta name="identifier" content="" scheme="http://purl.org/dc/terms/"/>
+    <meta name="title" content="" scheme="http://purl.org/dc/terms/"/>
+  </head>
   <Scene>
+    <WorldInfo DEF="WorldInfo"
+      title=""/>
     <Shape>
       <Appearance>
         <Material diffuseColor="1 0 0"/>

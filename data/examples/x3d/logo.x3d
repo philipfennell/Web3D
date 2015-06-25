@@ -19,7 +19,7 @@
     <TimeSensor cycleInterval="8" DEF="TIMERX" loop="true"/>
     <TimeSensor cycleInterval="7.5" DEF="TIMERY" loop="true"/>
     <TimeSensor cycleInterval="8.5" DEF="TIMERZ" loop="true"/>
-
+    
     <Group>
       <Transform rotation="0 1 0 0.8">
         <Transform rotation="1 0 0 0.63">
@@ -32,7 +32,7 @@
         </Transform>
       </Transform>
       <Transform>
-        <OrientationInterpolator DEF="ORIINTX" key="0, 0.25, 0.5, 0.75, 1" keyValue="1 0 0 1.57, 1 0 0 3.14, 1 0 0 4.71, 1 0 0 6.28, 1 0 0 1.57"/>
+        <OrientationInterpolator DEF="ORIINTX" key="0, 0.25, 0.5, 0.75, 1" keyValue="1 0 0 1.57,  1 0 0 3.14,  1 0 0 4.71,  1 0 0 6.28,  1 0 0 1.57"/>
         <OrientationInterpolator DEF="ORIINTY" key="0, 0.25, 0.5, 0.75, 1" keyValue="0 1 0 0, 0 1 0 1.57, 0 1 0 3.14, 0 1 0 4.71, 0 1 0 6.28"/>
         <OrientationInterpolator DEF="ORIINTZ" key="0, 0.25, 0.5, 0.75, 1" keyValue="0 0 1 -1.57, 0 0 1 -3.14, 0 0 1 -4.71, 0 0 1 -6.28, 0 0 1 -1.57"/>
         <Transform DEF="ORITGTX">
@@ -40,7 +40,7 @@
             <Transform DEF="ORITGTZ">
               <Shape>
                 <Appearance>
-                  <Material diffuseColor="0.8 0.5 0.0"/>
+                  <Material diffuseColor="0.9 0.6 0.0"/>
                 </Appearance>
                 <Box size="1 1 1"/>
               </Shape>
@@ -49,15 +49,15 @@
         </Transform>
       </Transform>
     </Group>
-
-    <ROUTE fromField="fraction" fromNode="TIMERX" toField="fraction" toNode="ORIINTX"/>
-    <ROUTE fromField="value" fromNode="ORIINTX" toField="rotation" toNode="ORITGTX"/>
-
-    <ROUTE fromField="fraction" fromNode="TIMERY" toField="fraction" toNode="ORIINTY"/>
-    <ROUTE fromField="value" fromNode="ORIINTY" toField="rotation" toNode="ORITGTY"/>
-
-    <ROUTE fromField="fraction" fromNode="TIMERZ" toField="fraction" toNode="ORIINTZ"/>
-    <ROUTE fromField="value" fromNode="ORIINTZ" toField="rotation" toNode="ORITGTZ"/>
-
+    
+    <ROUTE fromField="fraction_changed" fromNode="TIMERX"   toField="set_fraction" toNode="ORIINTX"/>
+    <ROUTE fromField="value_changed"    fromNode="ORIINTX"  toField="set_rotation" toNode="ORITGTX"/>
+    
+    <ROUTE fromField="fraction_changed" fromNode="TIMERY"   toField="set_fraction" toNode="ORIINTY"/>
+    <ROUTE fromField="value_changed"    fromNode="ORIINTY"  toField="set_rotation" toNode="ORITGTY"/>
+    
+    <ROUTE fromField="fraction_changed" fromNode="TIMERZ"   toField="set_fraction" toNode="ORIINTZ"/>
+    <ROUTE fromField="value_changed"    fromNode="ORIINTZ"  toField="set_rotation" toNode="ORITGTZ"/>
+    
   </Scene>
 </X3D>
